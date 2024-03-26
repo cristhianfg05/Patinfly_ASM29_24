@@ -8,7 +8,7 @@ data class UserModel(
     val username: String,
     val email: String,
     val isRenting: Boolean,
-    val scooterRented: UUID,
+    val scooterRented: UUID?,
     val creationDate: Date,
     val numberOfRents: Int,
     val encryptedKey: String

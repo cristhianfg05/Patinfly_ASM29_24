@@ -7,6 +7,10 @@ android {
     namespace = "com.patinfly"
     compileSdk = 34
 
+    viewBinding{
+        enable
+    }
+
     defaultConfig {
         applicationId = "com.patinfly"
         minSdk = 28

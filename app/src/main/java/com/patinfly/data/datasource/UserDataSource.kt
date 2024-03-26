@@ -1,25 +1,32 @@
 package com.patinfly.data.datasource
 
 import android.content.Context
+import android.util.Log
 import com.google.firebase.crashlytics.buildtools.reloc.com.google.common.reflect.TypeToken
 import com.patinfly.R
 import com.patinfly.data.model.UserModel
-import com.patinfly.domain.model.User
-import java.util.UUID
 import com.google.gson.Gson
+import com.google.gson.GsonBuilder
+import com.patinfly.customUtils.UUIDDeserializer
+import java.util.UUID
 
 class UserDataSource(private val context: Context) {
 
     private fun loadUsers(): List<UserModel> {
+        val gson: Gson = GsonBuilder()
+            .registerTypeAdapter(UUID::class.java, UUIDDeserializer())
+            .create()
+
         val inputStream = context.resources.openRawResource(R.raw.user)
         val jsonString = inputStream.bufferedReader().use { it.readText() }
-        val listType = object : TypeToken<List<User>>() {}.type
-        return Gson().fromJson(jsonString, listType)
+
+        val listType = object : TypeToken<List<UserModel>>() {}.type
+        return gson.fromJson(jsonString, listType)
     }
 
-    fun getUser(uuid: UUID): UserModel? {
+    fun getUser(username: String): UserModel? {
         val users = loadUsers()
-        return users.find { it.uuid == uuid }
+        return users.find { it.username == username }
     }
 
     fun saveUser(newUser: UserModel) {

@@ -8,15 +8,23 @@ import java.util.UUID
 
 class UserRepository(private val userDataSource: UserDataSource): IUserRepository {
 
-    override fun getUserByUUID(uuid: UUID): UserModel? {
-        return userDataSource.getUser(uuid)
+    override fun getUserByUsername(username: String): UserModel? {
+        if(username.isEmpty())
+            return null
+        return userDataSource.getUser(username)
     }
 
     override fun login(username: String, password: String): UserModel? {
+        val user = getUserByUsername(username)
+        if (user != null) {
+            if(user.encryptedKey == password)
+                return user
+        }
         return null
     }
 
     override fun registerUser(newUser: UserModel) {
+
         userDataSource.saveUser(newUser)
     }
 }

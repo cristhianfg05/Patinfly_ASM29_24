@@ -19,7 +19,7 @@ class LoginRegisterActivity : AppCompatActivity() {
             startActivity(Intent(this, LoginActivity::class.java))
         }
 
-        binding.loginBt.setOnClickListener{
+        binding.registerBt.setOnClickListener{
             startActivity(Intent(this, RegisterActivity::class.java))
         }
     }
