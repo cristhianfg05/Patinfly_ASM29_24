@@ -1,0 +1,35 @@
+[
+  {
+    "uuid": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+    "model": "Speedster V2",
+    "serialNumber": "SV2-001",
+    "longitude": -0.12574,
+    "latitude": 51.50853,
+    "vacant": true,
+    "batteryLevel": 85.0,
+    "batteryPartNumber": "BP-85V2",
+    "lastMaintenance": "2024-03-01"
+  },
+  {
+    "uuid": "3f0c4631-81cb-4d1b-9e6b-8b36e2dd8758",
+    "model": "City Glide",
+    "serialNumber": "CG-002",
+    "longitude": -0.14295,
+    "latitude": 51.50136,
+    "vacant": false,
+    "batteryLevel": 40.0,
+    "batteryPartNumber": "BP-CG40",
+    "lastMaintenance": null
+  },
+  {
+    "uuid": "1ec0e9f7-87e4-44ec-b1b6-8fb6c07d6e6a",
+    "model": "EcoRide Breeze",
+    "serialNumber": "ERB-003",
+    "longitude": -0.13183,
+    "latitude": 51.51425,
+    "vacant": true,
+    "batteryLevel": 62.5,
+    "batteryPartNumber": "BP-ERB62",
+    "lastMaintenance": "2024-02-15"
+  }
+]
