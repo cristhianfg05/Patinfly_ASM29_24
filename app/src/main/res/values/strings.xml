@@ -2,5 +2,6 @@
     <string name="app_name">Patinfly</string>
     <string name="username_hint">Username</string>
     <string name="password_hint">Password</string>
-    <string name="login_button_text">Login</string>
+    <string name="login_button_text">Inicia sesión</string>
+    <string name="register_button_text">Regístrate</string>
 </resources>

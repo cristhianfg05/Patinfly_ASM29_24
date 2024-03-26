@@ -13,13 +13,16 @@
         android:theme="@style/Theme.Patinfly"
         tools:targetApi="31">
         <activity
-            android:name=".views.LoginActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:name=".views.PrincipalActivity"
             android:exported="false" />
         <activity
+            android:name=".views.LoginActivity"
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
             android:name=".views.RegisterActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".views.LoginRegisterActivity"
             android:exported="false"

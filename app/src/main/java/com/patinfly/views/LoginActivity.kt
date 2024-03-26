@@ -36,8 +36,8 @@ class LoginActivity : AppCompatActivity() {
         val user = userRepository.getUserByUsername(username)
 
         if (user != null && user.encryptedKey == password) {
-            Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show()
-            startActivity(Intent(this, LoginActivity::class.java))
+            //Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this, PrincipalActivity::class.java))
         } else {
             // Login fallido, mostrar mensaje
             Toast.makeText(this, "Login Failed", Toast.LENGTH_SHORT).show()
