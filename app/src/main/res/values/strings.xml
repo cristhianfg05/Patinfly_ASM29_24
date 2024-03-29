@@ -1,7 +1,9 @@
 <resources>
     <string name="app_name">Patinfly</string>
-    <string name="username_hint">Username</string>
-    <string name="password_hint">Password</string>
+    <string name="username_hint">Nombre de usuario</string>
+    <string name="password_hint">Contraseña</string>
+    <string name="email_hint">Correo electrónico</string>
     <string name="login_button_text">Inicia sesión</string>
     <string name="register_button_text">Regístrate</string>
+    <string name="title_activity_pinga">pinga</string>
 </resources>

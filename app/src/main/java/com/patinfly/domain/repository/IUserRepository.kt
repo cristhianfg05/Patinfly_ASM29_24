@@ -7,5 +7,5 @@ import java.util.UUID
 interface IUserRepository {
     fun getUserByUsername(username: String): UserModel?
     fun login(username: String, password: String): UserModel?
-    fun registerUser(newUser: UserModel)
+    fun registerUser(newUser: UserModel) : Boolean
 }

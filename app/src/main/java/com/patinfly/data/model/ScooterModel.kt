@@ -7,10 +7,10 @@ data class ScooterModel(
     val uuid: UUID,
     val model: String,
     val serialNumber: String,
-    var longitude: Double,
-    var latitude: Double,
-    var vacant: Boolean,
-    var batteryLevel: Double,
+    val longitude: Double,
+    val latitude: Double,
+    val vacant: Boolean,
+    val batteryLevel: Double,
     val batteryPartNumber: String,
-    var lastMaintenance: Date? = null
+    val lastMaintenance: Date? = null
 )

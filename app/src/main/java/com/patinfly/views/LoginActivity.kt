@@ -24,18 +24,22 @@ class LoginActivity : AppCompatActivity() {
         val userDataSource = UserDataSource(this)
         userRepository = UserRepository(userDataSource)
 
-        binding.loginButton.setOnClickListener {
+        binding.loginBt.setOnClickListener {
             val username = binding.usernameEditText.text.toString()
-            val password = binding.passwordEditText.text.toString()
+            val password = binding.claveEditText.text.toString()
 
             loginUser(username, password)
+        }
+
+        binding.registerBt.setOnClickListener{
+            startActivity(Intent(this, RegisterActivity::class.java))
         }
     }
 
     private fun loginUser(username: String, password: String) {
         val user = userRepository.getUserByUsername(username)
 
-        if (user != null && user.encryptedKey == password) {
+        if (userRepository.login(username, password) != null) {
             //Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show()
             startActivity(Intent(this, PrincipalActivity::class.java))
         } else {

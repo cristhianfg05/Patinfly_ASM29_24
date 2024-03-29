@@ -7,8 +7,45 @@
     android:background="@drawable/bg"
     tools:context=".views.LoginActivity">
 
+    <Button
+        android:id="@+id/registerBt"
+        android:layout_width="258dp"
+        android:layout_height="64dp"
+        android:background="@drawable/round_button"
+        android:text="@string/register_button_text"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <Button
+        android:id="@+id/loginBt"
+        android:layout_width="258dp"
+        android:layout_height="62dp"
+        android:layout_marginTop="28dp"
+        android:background="@drawable/round_button"
+        android:text="@string/login_button_text"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/claveEditText" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="56dp"
+        android:fontFamily="sans-serif-black"
+        android:text="¿No tienes cuenta?"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/loginBt" />
+
     <EditText
-        android:id="@+id/passwordEditText"
+        android:id="@+id/claveEditText"
         android:layout_width="291dp"
         android:layout_height="53dp"
         android:layout_marginTop="24dp"
@@ -37,20 +74,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/loginButton"
-        android:layout_width="248dp"
-        android:layout_height="55dp"
-        android:background="@drawable/round_button"
-        android:text="@string/login_button_text"
-        android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/passwordEditText"
-        app:layout_constraintVertical_bias="0.219" />
-
     <ImageView
         android:id="@+id/imageView5"
         android:layout_width="217dp"
@@ -59,6 +82,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.266"
         app:srcCompat="@drawable/patinfly" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
