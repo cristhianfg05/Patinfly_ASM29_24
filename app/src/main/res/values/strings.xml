@@ -6,4 +6,8 @@
     <string name="login_button_text">Inicia sesión</string>
     <string name="register_button_text">Regístrate</string>
     <string name="title_activity_pinga">pinga</string>
+    <string name="title_activity_splash">SplashActivity</string>
+    <string name="title_activity_login_register">LoginRegisterActivity</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_register">RegisterActivity</string>
 </resources>
