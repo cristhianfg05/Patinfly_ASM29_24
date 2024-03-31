@@ -18,6 +18,7 @@ class UserRepository(private val userDataSource: UserDataSource): IUserRepositor
 
     override fun login(username: String, password: String): UserModel? {
         val user = getUserByUsername(username)
+        Log.d("logs", user.toString())
         if (user != null) {
             if(user.encryptedKey == hashPassword(password)) {
                 return user
@@ -27,6 +28,11 @@ class UserRepository(private val userDataSource: UserDataSource): IUserRepositor
     }
 
     override fun registerUser(newUser: UserModel):Boolean {
+        if(getUserByUsername(newUser.username) != null){
+            Log.d("logs", "userExiste registro")
+            return false
+        }
+        Log.d("logs", "user no existe registro")
         newUser.encryptedKey = hashPassword(newUser.encryptedKey)
         return userDataSource.saveUser(newUser)
     }

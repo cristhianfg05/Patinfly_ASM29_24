@@ -1,5 +1,6 @@
 package com.patinfly
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -27,6 +28,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
@@ -49,6 +51,7 @@ class LoginRegisterActivity : ComponentActivity() {
     @Composable
     @Preview
     fun LoginRegisterView() {
+        val context = LocalContext.current
         Box(modifier = Modifier.fillMaxSize()) {
 
             Image(
@@ -84,12 +87,6 @@ class LoginRegisterActivity : ComponentActivity() {
                     )
                 )
                 Spacer(modifier = Modifier.height(15.dp))
-                // Campos de texto
-                //CustomTextField(hint = "Username")
-                //Spacer(modifier = Modifier.height(16.dp))
-                //CustomTextField(hint = "Password")
-                //Spacer(modifier = Modifier.height(32.dp))
-
                 Text(
                     text = "¿Tienes cuenta?",
                     style = TextStyle(
@@ -100,7 +97,9 @@ class LoginRegisterActivity : ComponentActivity() {
                 )
                 Spacer(modifier = Modifier.height(16.dp))
                 CustomButton(
-                    onClick = { /* TODO: Implement login logic */ },
+                    onClick = {
+                        context.startActivity(Intent(context, LoginActivity::class.java))
+                    },
                     text = "Inicia Sesión"
                 )
                 Spacer(modifier = Modifier.height(30.dp))
@@ -114,7 +113,9 @@ class LoginRegisterActivity : ComponentActivity() {
                 )
                 Spacer(modifier = Modifier.height(16.dp))
                 CustomButton(
-                    onClick = { /* TODO: Navigate to registration screen */ },
+                    onClick = {
+                        context.startActivity(Intent(context, RegisterActivity::class.java))
+                    },
                     text = "Registrate"
                 )
 

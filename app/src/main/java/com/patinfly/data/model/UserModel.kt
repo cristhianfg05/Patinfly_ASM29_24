@@ -12,4 +12,5 @@ data class UserModel(
     val creationDate: Date,
     var numberOfRents: Int,
     var encryptedKey: String
+    
 )

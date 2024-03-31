@@ -14,43 +14,40 @@ import java.util.UUID
 
 class UserDataSource(private val context: Context) {
 
-    private val fileName = "users.json"
-    private fun loadUsers(): List<UserModel> {
-        val gson: Gson = GsonBuilder()
-            .registerTypeAdapter(UUID::class.java, UUIDDeserializer())
-            .create()
 
+    private val gson: Gson = GsonBuilder()
+        .registerTypeAdapter(UUID::class.java, UUIDDeserializer())
+        .create()
+
+    private val initialUsers by lazy { loadInitialUsers() }
+
+    private val inMemoryUsers = mutableListOf<UserModel>()
+
+    private fun loadInitialUsers(): List<UserModel> {
         val inputStream = context.resources.openRawResource(R.raw.user)
         val jsonString = inputStream.bufferedReader().use { it.readText() }
-
         val listType = object : TypeToken<List<UserModel>>() {}.type
         return gson.fromJson(jsonString, listType)
     }
 
     fun getUser(username: String): UserModel? {
-        val users = loadUsers()
-        return users.find { it.username == username }
+        inMemoryUsers.find { it.username == username }?.let { return it }
+        initialUsers.find { it.username == username }?.let { return it }
+        Log.d("inMemoryUsers", inMemoryUsers.toString())
+        return null
     }
 
     fun saveUser(newUser: UserModel): Boolean {
-        val users = loadUsers().toMutableList()
-        if (!users.any { it.uuid == newUser.uuid }) {
-            users.add(newUser)
-            saveUsersToFile(users)
-            Log.d("flag", "user nuevo")
+        /* TODO IMPLEMENTAR SHARED PREFERENCES*/
+        return inMemoryUsers.add(newUser)
+        /*if (!inMemoryUsers.any { it.uuid == newUser.uuid }) {
+            inMemoryUsers.add(newUser)
+            saveUsersToFile()
             return true
-        } else {
-            return false
         }
+        return false*/
     }
 
 
-    fun saveUsersToFile(users: List<UserModel>) {
-        val gson = Gson()
-        val jsonString = gson.toJson(users)
 
-        FileOutputStream(context.getFileStreamPath(fileName)).use { outputStream ->
-            outputStream.write(jsonString.toByteArray())
-        }
-    }
 }
