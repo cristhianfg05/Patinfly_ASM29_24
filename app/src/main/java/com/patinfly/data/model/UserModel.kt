@@ -5,11 +5,12 @@ import java.util.UUID
 
 data class UserModel(
     val uuid: UUID,
-    val username: String,
-    val email: String,
-    val isRenting: Boolean,
-    val scooterRented: UUID,
+    var username: String,
+    var email: String,
+    var isRenting: Boolean,
+    var scooterRented: UUID?,
     val creationDate: Date,
-    val numberOfRents: Int,
-    val encryptedKey: String
+    var numberOfRents: Int,
+    var encryptedKey: String
+    
 )

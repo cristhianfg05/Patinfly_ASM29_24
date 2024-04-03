@@ -1,0 +1,22 @@
+[
+  {
+    "uuid": "123e4567-e89b-12d3-a456-426614174000",
+    "username": "userDemo",
+    "email": "userdemo@example.com",
+    "isRenting": false,
+    "scooterRented": "",
+    "creationDate": "2024-03-23",
+    "numberOfRents": 0,
+    "encryptedKey": "ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f"
+  },
+  {
+    "uuid": "e88213d8-9e93-4a56-97b3-e9c3f154867b",
+    "username": "userDemo2",
+    "email": "userdemo@example.com",
+    "isRenting": false,
+    "scooterRented": "",
+    "creationDate": "2024-03-23",
+    "numberOfRents": 0,
+    "encryptedKey": "ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f"
+  }
+]
