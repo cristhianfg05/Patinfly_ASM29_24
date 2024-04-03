@@ -46,121 +46,121 @@ class RegisterActivity : ComponentActivity() {
             RegisterView()
         }
     }
-}
+    @Composable
+    @Preview
+    fun RegisterView() {
+        val context = LocalContext.current
 
-@Composable
-@Preview
-fun RegisterView() {
-    val context = LocalContext.current
+        var usernameInput by remember {
+            mutableStateOf("")
+        }
 
-    var usernameInput by remember {
-        mutableStateOf("")
-    }
+        var passwordInput by remember {
+            mutableStateOf("")
+        }
 
-    var passwordInput by remember {
-        mutableStateOf("")
-    }
+        var emailInput by remember {
+            mutableStateOf("")
+        }
 
-    var emailInput by remember {
-        mutableStateOf("")
-    }
+        val userRepository = UserRepository(UserDataSource.getInstance(applicationContext))
 
-    val userDataSource = UserDataSource(context)
-    val userRepository = UserRepository(userDataSource)
+        Box(modifier = Modifier.fillMaxSize()) {
 
-    Box(modifier = Modifier.fillMaxSize()) {
-
-        Image(
-            painter = painterResource(id = R.drawable.bg),
-            contentDescription = null,
-            modifier = Modifier.fillMaxSize(),
-            contentScale = ContentScale.Crop
-        )
-
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(16.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
-        ) {
-            // Logo
             Image(
-                painter = painterResource(id = R.drawable.patinfly),
-                contentDescription = "App Logo",
+                painter = painterResource(id = R.drawable.bg),
+                contentDescription = null,
+                modifier = Modifier.fillMaxSize(),
+                contentScale = ContentScale.Crop
+            )
+
+            Column(
                 modifier = Modifier
-                    .size(200.dp)
-                    .align(Alignment.CenterHorizontally)
-            )
-
-            Spacer(modifier = Modifier.height(15.dp))
-            // Campos de texto
-            CustomTextField(
-                hint = "Username",
-                onTextChange = { newText ->
-                    usernameInput = newText
-                }
-            )
-            Spacer(modifier = Modifier.height(16.dp))
-            CustomPassField(
-                hint = "Password",
-                onTextChange = { newText ->
-                    passwordInput = newText
-                }
-            )
-            Spacer(modifier = Modifier.height(16.dp))
-            CustomEmailField(
-                hint = "E-mail",
-                onTextChange = { newText ->
-                    emailInput = newText
-                }
-            )
-            Spacer(modifier = Modifier.height(16.dp))
-            CustomButton(
-                onClick = {
-                    if (!comprobarRegisterInputs(usernameInput, passwordInput, emailInput, context)){
-
-                        return@CustomButton
-                    }
-                    val registerUser = userRepository.getUserByUsername(usernameInput)
-                    if(registerUser != null){
-                        Toast.makeText(context, "El usuario ya existe. Inicia la sesión", Toast.LENGTH_LONG).show()
-                        return@CustomButton
-                    }
-                    val newUser = UserModel(UUID.randomUUID(),usernameInput,emailInput,false, null, Date(), 0, passwordInput )
-                    if(!userRepository.registerUser(newUser)) {
-                        Toast.makeText(context, "El usuario ya existe. Inicia la sesión", Toast.LENGTH_LONG).show()
-                        return@CustomButton
-                    }
-                    Toast.makeText(context, "Usuario Registrado", Toast.LENGTH_LONG).show()
-                    Log.d("logs", newUser.uuid.toString())
-                    context.startActivity(Intent(context, LoginActivity::class.java))
-
-
-                },
-                text = "Regístrate"
-            )
-            Spacer(modifier = Modifier.height(30.dp))
-            Text(
-                text = "¿Tienes cuenta?",
-                style = TextStyle(
-                    fontSize = 20.sp,
-                    fontFamily = FontFamily.SansSerif,
-                    fontWeight = FontWeight.Bold
+                    .fillMaxSize()
+                    .padding(16.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ) {
+                // Logo
+                Image(
+                    painter = painterResource(id = R.drawable.patinfly),
+                    contentDescription = "App Logo",
+                    modifier = Modifier
+                        .size(200.dp)
+                        .align(Alignment.CenterHorizontally)
                 )
-            )
-            Spacer(modifier = Modifier.height(16.dp))
-            CustomButton(
-                onClick = {
-                    context.startActivity(Intent(context, LoginActivity::class.java))
-                },
-                text = "Inicia Sesión"
-            )
+
+                Spacer(modifier = Modifier.height(15.dp))
+                // Campos de texto
+                CustomTextField(
+                    hint = "Username",
+                    onTextChange = { newText ->
+                        usernameInput = newText
+                    }
+                )
+                Spacer(modifier = Modifier.height(16.dp))
+                CustomPassField(
+                    hint = "Password",
+                    onTextChange = { newText ->
+                        passwordInput = newText
+                    }
+                )
+                Spacer(modifier = Modifier.height(16.dp))
+                CustomEmailField(
+                    hint = "E-mail",
+                    onTextChange = { newText ->
+                        emailInput = newText
+                    }
+                )
+                Spacer(modifier = Modifier.height(16.dp))
+                CustomButton(
+                    onClick = {
+                        if (!comprobarRegisterInputs(usernameInput, passwordInput, emailInput, context)){
+
+                            return@CustomButton
+                        }
+                        val registerUser = userRepository.getUserByUsername(usernameInput)
+                        if(registerUser != null){
+                            Toast.makeText(context, "El usuario ya existe. Inicia la sesión", Toast.LENGTH_LONG).show()
+                            return@CustomButton
+                        }
+                        val newUser = UserModel(UUID.randomUUID(),usernameInput,emailInput,false, null, Date(), 0, passwordInput )
+                        if(!userRepository.registerUser(newUser)) {
+                            Toast.makeText(context, "El usuario ya existe. Inicia la sesión", Toast.LENGTH_LONG).show()
+                            return@CustomButton
+                        }
+                        Toast.makeText(context, "Usuario Registrado", Toast.LENGTH_LONG).show()
+                        Log.d("logs", newUser.uuid.toString())
+                        context.startActivity(Intent(context, LoginActivity::class.java))
 
 
+                    },
+                    text = "Regístrate"
+                )
+                Spacer(modifier = Modifier.height(30.dp))
+                Text(
+                    text = "¿Tienes cuenta?",
+                    style = TextStyle(
+                        fontSize = 20.sp,
+                        fontFamily = FontFamily.SansSerif,
+                        fontWeight = FontWeight.Bold
+                    )
+                )
+                Spacer(modifier = Modifier.height(16.dp))
+                CustomButton(
+                    onClick = {
+                        context.startActivity(Intent(context, LoginActivity::class.java))
+                    },
+                    text = "Inicia Sesión"
+                )
+
+
+            }
         }
     }
+
 }
+
 
 private fun comprobarRegisterInputs(username: String, pass: String, email: String, context: Context): Boolean {
     // Contar cuántos campos están vacíos

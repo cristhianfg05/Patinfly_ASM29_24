@@ -3,6 +3,7 @@ package com.patinfly
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -42,105 +43,105 @@ class LoginActivity : ComponentActivity() {
             loginForm()
         }
     }
-}
+    @Composable
+    @Preview
+    fun loginForm() {
+        val context = LocalContext.current
 
-@Composable
-@Preview
-fun loginForm() {
-    val context = LocalContext.current
-
-    var usernameInput by remember {
-        mutableStateOf("")
-    }
-
-    var passwordInput by remember {
-        mutableStateOf("")
-    }
-
-    val userDataSource = UserDataSource(context)
-    val userRepository = UserRepository(userDataSource)
-
-    Box(modifier = Modifier.fillMaxSize()) {
-
-        Image(
-            painter = painterResource(id = R.drawable.bg),
-            contentDescription = null,
-            modifier = Modifier.fillMaxSize(),
-            contentScale = ContentScale.Crop
-        )
-
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(16.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
-        ) {
-            // Logo
-            Image(
-                painter = painterResource(id = R.drawable.patinfly),
-                contentDescription = "App Logo",
-                modifier = Modifier
-                    .size(200.dp)
-                    .align(Alignment.CenterHorizontally)
-            )
-
-            Spacer(modifier = Modifier.height(15.dp))
-            // Campos de texto
-            CustomTextField(
-                hint = "Nombre de usuario",
-                onTextChange = { newText ->
-                    usernameInput = newText
-                }
-            )
-            Spacer(modifier = Modifier.height(16.dp))
-            CustomPassField(
-                hint = "Contraseña",
-                onTextChange = { newText ->
-                    passwordInput = newText
-                }
-            )
-            Spacer(modifier = Modifier.height(16.dp))
-            CustomButton(
-                onClick = {
-                    if (!comprobarLoginInputs(context,usernameInput, passwordInput)) {
-                        return@CustomButton
-                    }
-
-
-                    val loginUser = userRepository.login(usernameInput,passwordInput)
-                    if(loginUser == null){
-                        Toast.makeText(context, "Datos introducidos incorrectos", Toast.LENGTH_LONG).show()
-                        return@CustomButton
-                    }
-
-                    Toast.makeText(context, "El usuario $usernameInput existe", Toast.LENGTH_LONG).show()
-                    context.startActivity(Intent(context, ProfileActivity::class.java))
-                },
-                text = "Inicia sesión"
-            )
-            Spacer(modifier = Modifier.height(30.dp))
-            Text(
-                text = "¿Eres nuevo aquí?",
-                style = TextStyle(
-                    fontSize = 20.sp,
-                    fontFamily = FontFamily.SansSerif,
-                    fontWeight = FontWeight.Bold
-                )
-            )
-            Spacer(modifier = Modifier.height(16.dp))
-            CustomButton(
-                onClick = {
-                    context.startActivity(Intent(context, RegisterActivity::class.java))
-                },
-                text = "Regístrate"
-            )
-
-
+        var usernameInput by remember {
+            mutableStateOf("")
         }
-    }
 
+        var passwordInput by remember {
+            mutableStateOf("")
+        }
+
+        val userRepository = UserRepository(UserDataSource.getInstance(applicationContext))
+
+        Box(modifier = Modifier.fillMaxSize()) {
+
+            Image(
+                painter = painterResource(id = R.drawable.bg),
+                contentDescription = null,
+                modifier = Modifier.fillMaxSize(),
+                contentScale = ContentScale.Crop
+            )
+
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(16.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ) {
+                // Logo
+                Image(
+                    painter = painterResource(id = R.drawable.patinfly),
+                    contentDescription = "App Logo",
+                    modifier = Modifier
+                        .size(200.dp)
+                        .align(Alignment.CenterHorizontally)
+                )
+
+                Spacer(modifier = Modifier.height(15.dp))
+                // Campos de texto
+                CustomTextField(
+                    hint = "Nombre de usuario",
+                    onTextChange = { newText ->
+                        usernameInput = newText
+                    }
+                )
+                Spacer(modifier = Modifier.height(16.dp))
+                CustomPassField(
+                    hint = "Contraseña",
+                    onTextChange = { newText ->
+                        passwordInput = newText
+                    }
+                )
+                Spacer(modifier = Modifier.height(16.dp))
+                CustomButton(
+                    onClick = {
+                        if (!comprobarLoginInputs(context,usernameInput, passwordInput)) {
+                            return@CustomButton
+                        }
+
+
+                        val loginUser = userRepository.login(usernameInput,passwordInput)
+                        if(loginUser == null){
+                            Toast.makeText(context, "El usuario o la clave son incorrectos", Toast.LENGTH_LONG).show()
+                            return@CustomButton
+                        }
+
+                        Toast.makeText(context, "El usuario $usernameInput existe", Toast.LENGTH_LONG).show()
+                        context.startActivity(Intent(context, ProfileActivity::class.java).putExtra("userUUID", loginUser.uuid.toString()))
+                    },
+                    text = "Inicia sesión"
+                )
+                Spacer(modifier = Modifier.height(30.dp))
+                Text(
+                    text = "¿Eres nuevo aquí?",
+                    style = TextStyle(
+                        fontSize = 20.sp,
+                        fontFamily = FontFamily.SansSerif,
+                        fontWeight = FontWeight.Bold
+                    )
+                )
+                Spacer(modifier = Modifier.height(16.dp))
+                CustomButton(
+                    onClick = {
+                        context.startActivity(Intent(context, RegisterActivity::class.java))
+                    },
+                    text = "Regístrate"
+                )
+
+
+            }
+        }
+
+    }
 }
+
+
 fun comprobarLoginInputs(context: Context, username: String, pass: String): Boolean {
     // Contar cuántos campos están vacíos
     val emptyFields = listOf(username, pass).count { it.isEmpty() }

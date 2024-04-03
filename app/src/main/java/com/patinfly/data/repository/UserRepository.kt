@@ -1,14 +1,18 @@
 package com.patinfly.data.repository
 
-import android.util.Log
 import com.patinfly.data.datasource.UserDataSource
 import com.patinfly.data.model.UserModel
-import com.patinfly.domain.model.User
 import com.patinfly.domain.repository.IUserRepository
-import java.security.MessageDigest
+import java.util.Date
 import java.util.UUID
 
 class UserRepository(private val userDataSource: UserDataSource): IUserRepository {
+
+    override fun getUserByUUID(uuid: UUID): UserModel? {
+        if(uuid.equals(null))
+            return null
+        return userDataSource.getUser(uuid)
+    }
 
     override fun getUserByUsername(username: String): UserModel? {
         if(username.isEmpty())
@@ -18,9 +22,8 @@ class UserRepository(private val userDataSource: UserDataSource): IUserRepositor
 
     override fun login(username: String, password: String): UserModel? {
         val user = getUserByUsername(username)
-        Log.d("logs", user.toString())
         if (user != null) {
-            if(user.encryptedKey == hashPassword(password)) {
+            if(user.encryptedKey == userDataSource.hashPassword(password)) {
                 return user
             }
         }
@@ -29,29 +32,15 @@ class UserRepository(private val userDataSource: UserDataSource): IUserRepositor
 
     override fun registerUser(newUser: UserModel):Boolean {
         if(getUserByUsername(newUser.username) != null){
-            Log.d("logs", "userExiste registro")
             return false
         }
-        Log.d("logs", "user no existe registro")
-        newUser.encryptedKey = hashPassword(newUser.encryptedKey)
+        newUser.encryptedKey = userDataSource.hashPassword(newUser.encryptedKey)
         return userDataSource.saveUser(newUser)
     }
 
-    private fun hashPassword(password: String): String {
-        val digest = MessageDigest.getInstance("SHA-256")
-        val result = digest.digest(password.toByteArray(Charsets.UTF_8))
-        return bytesToHex(result)
+    override fun modifyUser(user:UserModel): Boolean {
+        return userDataSource.modifyUser(user.uuid, user.username, user.email, user.encryptedKey)
     }
 
-    private fun bytesToHex(hash: ByteArray): String {
-        val hexString = StringBuilder(2 * hash.size)
-        for (b in hash) {
-            val hex = Integer.toHexString(0xff and b.toInt())
-            if (hex.length == 1) {
-                hexString.append('0')
-            }
-            hexString.append(hex)
-        }
-        return hexString.toString()
-    }
+
 }
