@@ -115,7 +115,7 @@ fun loginForm() {
                     }
 
                     Toast.makeText(context, "El usuario $usernameInput existe", Toast.LENGTH_LONG).show()
-                    context.startActivity(Intent(context, ScooterActivity::class.java))
+                    context.startActivity(Intent(context, ProfileActivity::class.java))
                 },
                 text = "Inicia sesión"
             )

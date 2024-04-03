@@ -54,7 +54,7 @@ class SplashActivity : ComponentActivity() {
             // Navegación después de un retraso
             LaunchedEffect(key1 = true) {
                 delay(2000)
-                context.startActivity(Intent(context, LoginRegisterActivity::class.java))
+                context.startActivity(Intent(context, LoginActivity::class.java))
                 finish()
             }
         }

@@ -133,7 +133,6 @@ fun RegisterView() {
                         return@CustomButton
                     }
                     Toast.makeText(context, "Usuario Registrado", Toast.LENGTH_LONG).show()
-                    /* TODO Redirección pagina principal perfil */
                     Log.d("logs", newUser.uuid.toString())
                     context.startActivity(Intent(context, LoginActivity::class.java))
 
