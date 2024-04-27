@@ -18,4 +18,10 @@ class ScooterRepository(private val scooterDataSource: ScooterDataSource): IScoo
     override fun updateScooter(scooterModel: ScooterModel) {
         scooterDataSource.saveScooter(scooterModel)
     }
+
+    override fun addNewScooter(scooterModel: ScooterModel) {
+        scooterDataSource.saveScooter(scooterModel)
+    }
+
+
 }

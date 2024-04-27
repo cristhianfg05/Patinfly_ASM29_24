@@ -1,5 +1,6 @@
 package com.patinfly
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -52,6 +53,7 @@ class ProfileActivity : ComponentActivity() {
             ProfileScreen(uuid)
         }
     }
+    @SuppressLint("SuspiciousIndentation")
     @Composable
     fun ProfileScreen(uuid : UUID) {
         val context = LocalContext.current

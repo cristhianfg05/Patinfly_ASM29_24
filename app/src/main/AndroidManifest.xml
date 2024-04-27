@@ -50,6 +50,12 @@
             android:exported="false"
             android:label="@string/title_activity_login_register"
             android:theme="@style/Theme.Patinfly" />
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="false"
+            android:label="@string/title_activity_main"
+            android:theme="@style/Theme.Patinfly"/>
     </application>
 
 </manifest>
