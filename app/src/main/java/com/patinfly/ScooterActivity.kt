@@ -53,9 +53,9 @@ class ScooterActivity : ComponentActivity() {
 fun ScooterListScreen() {
 
     var context = LocalContext.current
-    val scooterDataSource = ScooterDataSource(context)
-    val scooterRepository = ScooterRepository(scooterDataSource)
-    val scooterList = scooterRepository.getAllScooters()
+    //val scooterDataSource = ScooterDataSource(context)
+    //val scooterRepository = ScooterRepository(scooterDataSource)
+    //val scooterList = scooterRepository.getAllScooters()
     Scaffold(
         bottomBar = {
             BottomAppBar(
@@ -81,7 +81,7 @@ fun ScooterListScreen() {
                 contentScale = ContentScale.Crop
             )
             Text(text = "Hola userDemo")
-            ScooterList(scooterList)
+            //ScooterList(scooterList)
         }
     }
 }
