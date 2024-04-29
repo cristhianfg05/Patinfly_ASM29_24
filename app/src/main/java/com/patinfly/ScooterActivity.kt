@@ -33,6 +33,7 @@ import androidx.compose.ui.unit.sp
 import com.patinfly.data.datasource.ScooterDataSource
 import com.patinfly.data.model.ScooterModel
 import com.patinfly.data.repository.ScooterRepository
+import java.util.UUID
 
 
 class ScooterActivity : ComponentActivity() {
@@ -40,22 +41,21 @@ class ScooterActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-
-            ScooterListScreen()
+            val uuidString = intent.getStringExtra("userUUID")
+            val uuid = UUID.fromString(uuidString)
+            ScooterListScreen(uuid)
 
         }
     }
 
 }
 
-@Preview
 @Composable
-fun ScooterListScreen() {
+fun ScooterListScreen(uuid:UUID) {
 
-    var context = LocalContext.current
-    //val scooterDataSource = ScooterDataSource(context)
-    //val scooterRepository = ScooterRepository(scooterDataSource)
-    //val scooterList = scooterRepository.getAllScooters()
+    val context = LocalContext.current
+    val scooterRepository = ScooterRepository(ScooterDataSource.getInstance(context.applicationContext))
+    val scooterList = scooterRepository.getAllScooters()
     Scaffold(
         bottomBar = {
             BottomAppBar(
@@ -64,7 +64,11 @@ fun ScooterListScreen() {
             ) {
                 Spacer(Modifier.weight(1f, true))
                 FloatingActionButton(
-                    onClick = { context.startActivity(Intent(context, ProfileActivity::class.java)) },
+                    onClick = {
+                        val intent = Intent(context, ProfileActivity::class.java)
+                        intent.putExtra("userUUID", uuid.toString()) // Asegúrate de convertir UUID a String.
+                        context.startActivity(intent)
+                    },
                     containerColor = Color.LightGray
                 ) {
                     Icon(Icons.Filled.Face, contentDescription = "Perfil")
@@ -81,7 +85,7 @@ fun ScooterListScreen() {
                 contentScale = ContentScale.Crop
             )
             Text(text = "Hola userDemo")
-            //ScooterList(scooterList)
+            ScooterList(scooterList)
         }
     }
 }

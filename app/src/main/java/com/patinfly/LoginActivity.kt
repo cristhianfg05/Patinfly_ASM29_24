@@ -113,7 +113,7 @@ class LoginActivity : ComponentActivity() {
                         }
 
                         Toast.makeText(context, "El usuario $usernameInput existe", Toast.LENGTH_LONG).show()
-                        context.startActivity(Intent(context, ProfileActivity::class.java).putExtra("userUUID", loginUser.uuid.toString()))
+                        context.startActivity(Intent(context, ScooterActivity::class.java).putExtra("userUUID", loginUser.uuid.toString()))
                     },
                     text = "Inicia sesión"
                 )

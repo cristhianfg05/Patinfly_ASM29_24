@@ -27,6 +27,9 @@ class SplashActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+            //CRISTHIAN FAJARDO GIL
+            //BRYAN OYONATE GONZALEZ
+            //ASM29
             SplashView()
         }
     }
