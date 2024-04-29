@@ -9,8 +9,8 @@ import com.patinfly.data.model.dbdatasource.UserEntity
 @Database(entities = [UserEntity::class], version = 1)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun userDataSource(): UserDao
-    //abstract fun scooterDataSource(): ScooterDao
-//abstract fun rentDataSource(): RentDao
+    abstract fun scooterDataSource(): ScooterDao
+    abstract fun rentDataSource(): RentDao
     companion object {
         @Volatile
         private var INSTANCE: AppDatabase? = null
@@ -22,7 +22,7 @@ abstract class AppDatabase : RoomDatabase() {
                     "patinfly_24_database"
                 ).build()
                 INSTANCE = instance
-// return instance
+
                 instance
             }
         }
