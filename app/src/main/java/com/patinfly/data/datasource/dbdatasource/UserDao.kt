@@ -10,7 +10,6 @@ import java.util.UUID
 
 @Dao
 interface UserDao {
-    // CRUD Methods: Create, Request, Update and Delete
     @Insert
     fun save(userEntity: UserEntity)
     @Query("select * from UserEntity where uuid = :uuid")
